@@ -127,6 +127,7 @@ func (q InsertQuery) Exec() (db.InsertResults, error) {
 
 	if len(q.returningColumns) > 0 {
 		resRows, err := q.db.connection.Query(q.db.ctx, sql, args...)
+		defer resRows.Close()
 
 		if err != nil {
 			return nil, err
